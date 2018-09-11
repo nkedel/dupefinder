@@ -14,8 +14,8 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.github.jengelman.gradle.plugins:shadow:2.0.3")
-        classpath("com.github.ben-manes:gradle-versions-plugin:0.17.0")
+        classpath("com.github.jengelman.gradle.plugins:shadow:2.0.4")
+        classpath("com.github.ben-manes:gradle-versions-plugin:0.20.0")
     }
 
 }
@@ -27,7 +27,7 @@ repositories {
 plugins {
     java
     application
-    kotlin("jvm") version "1.2.31"
+    kotlin("jvm") version "1.2.61"
 }
 
 apply {
@@ -41,12 +41,16 @@ application {
 
 dependencies {
     compile(kotlin("stdlib"))
-    compile("com.googlecode.lanterna:lanterna:3.0.0")
-    compile("joda-time:joda-time:2.9.9")
+    compile("com.googlecode.lanterna:lanterna:3.0.1")
+    compile("joda-time:joda-time:2.10")
+    compile("com.google.guava:guava:26.0-jre")
+    compile("org.apache.commons:commons-collections4:4.2")
+    compile("org.apache.commons:commons-lang3:3.8")
+    compile("commons-codec:commons-codec:1.11")
     testCompile("junit", "junit", "4.12")
 }
 
 configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_1_9
-    targetCompatibility = JavaVersion.VERSION_1_9
+    sourceCompatibility = JavaVersion.VERSION_1_10
+    targetCompatibility = JavaVersion.VERSION_1_10
 }

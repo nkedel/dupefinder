@@ -19,7 +19,6 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory
 import java.io.IOException
 import java.util.*
 
-
 fun main(args: Array<String>) {
     /*
         In this forth tutorial we will finally look at creating a multi-window text GUI, all based on text. Just like
@@ -53,7 +52,7 @@ fun main(args: Array<String>) {
             if you attempt to mutate the GUI from another thread. Another default setting that will be applied is that
             the background of the GUI will be solid blue.
              */
-        val textGUI = MultiWindowTextGUI(screen!!)
+        val textGUI = MultiWindowTextGUI(screen)
 
         /*
             Creating a new window is relatively uncomplicated, you can optionally supply a title for the window
@@ -186,7 +185,7 @@ fun main(args: Array<String>) {
     } finally {
         if (screen != null) {
             try {
-                screen!!.stopScreen()
+                screen.stopScreen()
             } catch (e: IOException) {
                 e.printStackTrace()
             }
