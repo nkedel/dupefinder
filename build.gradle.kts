@@ -1,67 +1,47 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import com.github.benmanes.gradle.versions.VersionsPlugin
+plugins {
+    java
+    application
+    kotlin("jvm") version "1.3.72"
+    id("se.patrikerdes.use-latest-versions") version "0.2.14"
+    id("com.github.ben-manes.versions") version "0.21.0"
+//    id("com.github.johnrengelman.shadow") version "6.0.0"
+}
 
 group = "us.n8l"
 version = "0.1.0-SNAPSHOT"
 
-buildscript {
-    repositories {
-        jcenter()
-        mavenCentral()
-        maven {
-            setUrl("https://plugins.gradle.org/m2/")
-        }
-    }
-
-    dependencies {
-        classpath("com.github.jengelman.gradle.plugins:shadow:4.0.4")
-        classpath("com.github.ben-manes:gradle-versions-plugin:0.20.0")
-    }
-
-//    plugins {
-//      id "net.ltgt.apt" version "0.18"
-//    }
-
-
-}
 repositories {
-    jcenter()
     mavenCentral()
+    jcenter()
 }
 
-plugins {
-    java
-    application
-    kotlin("jvm") version "1.3.20"
-}
 
-apply {
-    plugin("com.github.johnrengelman.shadow")
-    plugin("com.github.ben-manes.versions")
-//    plugin("net.ltgt.apt")
-}
 
-application {
-    mainClassName = "us.n8l.duplicatefinder.Console"
+java {
+    modularity.inferModulePath.set(true)
 }
 
 dependencies {
-    compile(kotlin("stdlib"))
-    compile("com.google.code.findbugs:jsr305:3.0.2")
-    compile("com.googlecode.lanterna:lanterna:3.0.1")
-    compile("commons-codec:commons-codec:1.11")
-    compile("joda-time:joda-time:2.10.1")
-    compile("org.apache.commons:commons-collections4:4.2")
-    compile("org.apache.commons:commons-lang3:3.8.1")
+    implementation(kotlin("stdlib"))
+    testCompile("junit", "junit", "4.12")
+    implementation("com.google.code.findbugs:jsr305:3.0.2")
+    implementation("com.googlecode.lanterna:lanterna:3.0.1")
+    implementation("commons-codec:commons-codec:1.11")
+    implementation("joda-time:joda-time:2.10.1")
+    implementation("org.apache.commons:commons-collections4:4.2")
+    implementation("org.apache.commons:commons-lang3:3.8.1")
     // compile("com.googlecode.lanterna:lanterna:3.0.1")
-    compile(files("lib/lanterna-3.1.0-SNAPSHOT.jar", "lib/lanterna-native-integration-3.0.0-SNAPSHOT.jar"))
-    compile("org.apache.logging.log4j:log4j-api:2.11.1")
-    compile("org.apache.logging.log4j:log4j-core:2.11.1")
-    compile("org.apache.logging.log4j:log4j-slf4j-impl:2.11.1")
-    compile("com.google.guava:guava:27.0.1-jre")
-    compile("org.jline:jline:3.9.0")
+    implementation("org.apache.logging.log4j:log4j-api:2.11.1")
+    implementation("org.apache.logging.log4j:log4j-core:2.11.1")
+    implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.11.1")
+    implementation("com.google.guava:guava:27.0.1-jre")
+    implementation("org.jline:jline:3.9.0")
 //    annotationProcessor "org.apache.logging.log4j:log4j-core:2.11.1")
-    testCompile("junit:junit:4.12")
+}
+
+application {
+    mainModule.set("us.n8l.duplicatefinder") // name defined in module-info.java
+    mainClass.set("us.n8l.duplicatefinder.Console")
 }
 
 configure<JavaPluginConvention> {
