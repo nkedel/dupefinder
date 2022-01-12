@@ -1,6 +1,5 @@
 package us.n8l.duplicatefinder;
 
-import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.Contract;
@@ -29,7 +28,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class DuplicateFinder {
-  private static final Set<FileVisitOption> FILE_VISIT_OPTIONS = ImmutableSet.of(FileVisitOption.FOLLOW_LINKS);
+  private static final Set<FileVisitOption> FILE_VISIT_OPTIONS = Set.of(FileVisitOption.FOLLOW_LINKS);
   private final Map<String, DirectoryPath> directories = new ConcurrentHashMap<>();
   private final Map<Long, ConcurrentLinkedQueue<FilePath>> filesBySize = new ConcurrentHashMap<>();
   //  private final Map<MD5, ConcurrentLinkedQueue<FilePath>> filesByHeaderHash = new ConcurrentHashMap<>();
